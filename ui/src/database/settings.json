@@ -1,0 +1,51 @@
+{
+    "QC": {
+        "General": {
+                "Filter": true,
+                "Taxonomy": false,
+                "Fitlong":{
+                    "inputFileType": "Fasta",
+                    "outputFileType": "Fasta",
+                    "toolSummary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                    "readMeLink":"www.readmeGitLink.com",
+                    "Setting1": 5,
+                    "Setting2": "random",
+                    "Setting3": true,
+                    "customSetting": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
+                },
+                "Nanoplot": {
+                    "Setting1": 5,
+                    "Setting2": "random",
+                    "Setting3": true
+                },
+                "Trimmomatic": {
+                    "Setting1": 5,
+                    "Setting2": "random",
+                    "Setting3": true
+                }
+            },
+            "Custom": {
+                "Fitlong":{
+                    "Setting1": 5,
+                    "Setting2": "random",
+                    "Setting3": true
+                },
+                "Nanoplot": {
+                    "Setting1": 5,
+                    "Setting2": "random",
+                    "Setting3": true
+                },
+                "Trimmomatic": {
+                    "Setting1": 5,
+                    "Setting2": "random",
+                    "Setting3": true
+                }
+            }
+    },
+    "Pipeline 1": {
+
+    },
+    "Pipeline 2": {
+
+    }
+}
