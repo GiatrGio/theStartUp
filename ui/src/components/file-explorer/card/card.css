@@ -1,0 +1,18 @@
+.cardMain {
+    border: solid black;
+    font-size: 18px;
+}
+
+.PreTextIcon {
+    display: block;
+    width: 16px;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.contextMenu {
+    position: fixed;
+    z-index: 10;
+    background: orange;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}

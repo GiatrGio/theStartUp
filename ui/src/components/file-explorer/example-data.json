@@ -1,0 +1,141 @@
+{
+  "workspace-1": {
+    "rootId": "workspace-1",
+    "items": {
+      "workspace-1": {
+        "id": "workspace-1",
+        "hasChildren": true,
+        "isExpanded": false,
+        "isChildrenLoading": false,
+        "data": {
+          "id": "workspace-1",
+          "type": "workspace",
+          "name": "WorkSpace 1",
+          "QCReportUrl": "",
+          "size": "",
+          "isSelected": false
+        },
+        "children": [
+          "folder-1",
+          "file-3",
+          "folder-2"
+        ]
+      },
+      "folder-1": {
+        "id": "folder-1",
+        "hasChildren": true,
+        "isExpanded": false,
+        "isChildrenLoading": false,
+        "data": {
+          "id": "folder-1",
+          "type": "folder",
+          "name": "Tomato Folder",
+          "QCReportUrl": "multiQCReports/multiqc_report_single.html",
+          "size": "1.5GB",
+          "isSelected": false
+        },
+        "children": [
+          "folder-3",
+          "file-1"
+        ]
+      },
+      "folder-3": {
+        "id": "folder-3",
+        "hasChildren": true,
+        "isExpanded": false,
+        "isChildrenLoading": false,
+        "data": {
+          "id": "folder-3",
+          "type": "folder",
+          "name": "Contain 1 fastq tomato",
+          "QCReportUrl": "multiQCReports/multiqc_report_single.html",
+          "size": "1.5GB",
+          "isSelected": false
+        },
+        "children": [
+          "file-2"
+        ]
+      },
+      "file-1": {
+        "id": "file-1",
+        "hasChildren": false,
+        "isExpanded": false,
+        "isChildrenLoading": false,
+        "data": {
+          "id": "file-1",
+          "type": "fastqc",
+          "name": "Tomato FastQC 1",
+          "QCReportUrl": "multiQCReports/multiqc_report.html",
+          "size": "700MB",
+          "isSelected": false
+        },
+        "children": []
+      },
+      "file-2": {
+        "id": "file-2",
+        "hasChildren": false,
+        "isExpanded": false,
+        "isChildrenLoading": false,
+        "data": {
+          "id": "file-2",
+          "type": "fastqc",
+          "name": "Tomato FastQC 2",
+          "QCReportUrl": "multiQCReports/multiqc_report.html",
+          "size": "800MB",
+          "isSelected": false
+        },
+        "children": []
+      },
+      "folder-2": {
+        "id": "folder-2",
+        "hasChildren": false,
+        "isExpanded": false,
+        "isChildrenLoading": false,
+        "data": {
+          "id": "folder-2",
+          "type": "folder",
+          "name": "Tomato Folder Empty",
+          "QCReportUrl": "",
+          "size": "800MB",
+          "isSelected": false
+        },
+        "children": []
+      },
+      "file-3": {
+        "id": "file-3",
+        "hasChildren": false,
+        "isExpanded": false,
+        "isChildrenLoading": false,
+        "data": {
+          "id": "file-3",
+          "type": "fastqc",
+          "name": "Spinach FastQC 1",
+          "QCReportUrl": "",
+          "size": "600MB",
+          "isSelected": false
+        },
+        "children": []
+      }
+    }
+  },
+  "workspace-2": {
+    "rootId": "workspace-2",
+    "items": {
+      "workspace-2": {
+        "id": "workspace-2",
+        "hasChildren": false,
+        "isExpanded": false,
+        "isChildrenLoading": false,
+        "data": {
+          "id": "workspace-2",
+          "type": "workspace",
+          "name": "WorkSpace 2",
+          "QCReportUrl": "",
+          "size": "",
+          "isSelected": false
+        },
+        "children": []
+      }
+    }
+  }
+}
