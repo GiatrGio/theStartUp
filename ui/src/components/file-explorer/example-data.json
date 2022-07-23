@@ -12,7 +12,8 @@
           "type": "workspace",
           "name": "WorkSpace 1",
           "QCReportUrl": "",
-          "size": ""
+          "size": "",
+          "isSelected": false
         },
         "children": [
           "folder-1",
@@ -30,7 +31,8 @@
           "type": "folder",
           "name": "Tomato Folder",
           "QCReportUrl": "multiQCReports/multiqc_report_single.html",
-          "size": "1.5GB"
+          "size": "1.5GB",
+          "isSelected": false
         },
         "children": [
           "folder-3",
@@ -47,7 +49,8 @@
           "type": "folder",
           "name": "Contain 1 fastq tomato",
           "QCReportUrl": "multiQCReports/multiqc_report_single.html",
-          "size": "1.5GB"
+          "size": "1.5GB",
+          "isSelected": false
         },
         "children": [
           "file-2"
@@ -63,7 +66,8 @@
           "type": "fastqc",
           "name": "Tomato FastQC 1",
           "QCReportUrl": "multiQCReports/multiqc_report.html",
-          "size": "700MB"
+          "size": "700MB",
+          "isSelected": false
         },
         "children": []
       },
@@ -77,7 +81,8 @@
           "type": "fastqc",
           "name": "Tomato FastQC 2",
           "QCReportUrl": "multiQCReports/multiqc_report.html",
-          "size": "800MB"
+          "size": "800MB",
+          "isSelected": false
         },
         "children": []
       },
@@ -91,7 +96,8 @@
           "type": "folder",
           "name": "Tomato Folder Empty",
           "QCReportUrl": "",
-          "size": "800MB"
+          "size": "800MB",
+          "isSelected": false
         },
         "children": []
       },
@@ -105,7 +111,8 @@
           "type": "fastqc",
           "name": "Spinach FastQC 1",
           "QCReportUrl": "",
-          "size": "600MB"
+          "size": "600MB",
+          "isSelected": false
         },
         "children": []
       }
@@ -124,7 +131,8 @@
           "type": "workspace",
           "name": "WorkSpace 2",
           "QCReportUrl": "",
-          "size": ""
+          "size": "",
+          "isSelected": false
         },
         "children": []
       }
