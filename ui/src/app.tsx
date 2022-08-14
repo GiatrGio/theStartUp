@@ -12,13 +12,13 @@ function App() {
 
   return (
     <div className="App Container">
-      <div className="grid-item-1"></div>
-      <div className="grid-item-2"></div>
-      <div className="grid-item-3"></div>
-      <div className="grid-item-4"></div>
-      <div className="grid-item-5"></div>
-      {/*<h1>Test tree</h1>*/}
-      {/*<Index workspace={activeWorkspace} workspaceName={workspaceName} />*/}
+      {/*<div className="grid-item-1"></div>*/}
+      {/*<div className="grid-item-2"></div>*/}
+      {/*<div className="grid-item-3"></div>*/}
+      {/*<div className="grid-item-4"></div>*/}
+      {/*<div className="grid-item-5"></div>*/}
+      <h1>Test tree</h1>
+      <Index workspace={activeWorkspace} workspaceName={workspaceName} />
     </div>
   );
 }

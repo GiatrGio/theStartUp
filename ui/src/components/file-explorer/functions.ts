@@ -29,3 +29,32 @@ export const deleteItemFromTree = (
 
   return tree;
 };
+
+export const renameItemFromTree = (
+  tree: TreeData,
+  itemId: ItemId,
+  newName: string
+): TreeData => {
+  for (const [, value] of Object.entries(tree.items)) {
+    if (value.id === itemId) {
+      value.data.name = newName;
+      break;
+    }
+  }
+
+  return tree;
+};
+
+export const selectItemFromTree = (
+  tree: TreeData,
+  itemId: ItemId
+): TreeData => {
+  for (const [, value] of Object.entries(tree.items)) {
+    if (value.id === itemId) {
+      value.data.selected = !value.data.selected;
+      break;
+    }
+  }
+
+  return tree;
+};

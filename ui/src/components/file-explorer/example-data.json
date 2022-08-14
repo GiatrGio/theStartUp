@@ -13,7 +13,7 @@
           "name": "WorkSpace 1",
           "QCReportUrl": "",
           "size": "",
-          "isSelected": false
+          "selected": false
         },
         "children": [
           "folder-1",
@@ -32,7 +32,7 @@
           "name": "Tomato Folder",
           "QCReportUrl": "multiQCReports/multiqc_report_single.html",
           "size": "1.5GB",
-          "isSelected": false
+          "selected": false
         },
         "children": [
           "folder-3",
@@ -50,7 +50,7 @@
           "name": "Contain 1 fastq tomato",
           "QCReportUrl": "multiQCReports/multiqc_report_single.html",
           "size": "1.5GB",
-          "isSelected": false
+          "selected": false
         },
         "children": [
           "file-2"
@@ -67,7 +67,7 @@
           "name": "Tomato FastQC 1",
           "QCReportUrl": "multiQCReports/multiqc_report.html",
           "size": "700MB",
-          "isSelected": false
+          "selected": false
         },
         "children": []
       },
@@ -82,7 +82,7 @@
           "name": "Tomato FastQC 2",
           "QCReportUrl": "multiQCReports/multiqc_report.html",
           "size": "800MB",
-          "isSelected": false
+          "selected": false
         },
         "children": []
       },
@@ -97,7 +97,7 @@
           "name": "Tomato Folder Empty",
           "QCReportUrl": "",
           "size": "800MB",
-          "isSelected": false
+          "selected": false
         },
         "children": []
       },
@@ -112,7 +112,7 @@
           "name": "Spinach FastQC 1",
           "QCReportUrl": "",
           "size": "600MB",
-          "isSelected": false
+          "selected": false
         },
         "children": []
       }
@@ -132,7 +132,7 @@
           "name": "WorkSpace 2",
           "QCReportUrl": "",
           "size": "",
-          "isSelected": false
+          "selected": false
         },
         "children": []
       }

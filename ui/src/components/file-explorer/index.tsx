@@ -9,7 +9,11 @@ import Tree, {
   TreeSourcePosition,
 } from "@atlaskit/tree";
 import Card from "./card/card";
-import { deleteItemFromTree } from "./functions";
+import {
+  deleteItemFromTree,
+  renameItemFromTree,
+  selectItemFromTree,
+} from "./functions";
 
 const PADDING_PER_LEVEL = 16;
 
@@ -42,6 +46,8 @@ function Index(props: MultiTreeIndexProps) {
           onExpand={onExpand}
           onCollapse={onCollapse}
           deleteItem={deleteItem}
+          renameItem={renameItem}
+          selectItem={selectItem}
         />
       </div>
     );
@@ -69,6 +75,16 @@ function Index(props: MultiTreeIndexProps) {
   const deleteItem = (itemId: ItemId) => {
     let newTree = JSON.parse(JSON.stringify(tree));
     setTree(deleteItemFromTree(newTree, itemId));
+  };
+
+  const renameItem = (itemId: ItemId, newName: string) => {
+    let newTree = JSON.parse(JSON.stringify(tree));
+    setTree(renameItemFromTree(newTree, itemId, newName));
+  };
+
+  const selectItem = (itemId: ItemId) => {
+    let newTree = JSON.parse(JSON.stringify(tree));
+    setTree(selectItemFromTree(newTree, itemId));
   };
 
   const addFolder = () => {
