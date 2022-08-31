@@ -13,7 +13,7 @@ import {
   deleteItemFromTree,
   renameItemFromTree,
   selectItemFromTree,
-} from "./functions";
+} from "./fileExplorerFunctions/functions";
 
 const PADDING_PER_LEVEL = 16;
 
@@ -53,6 +53,10 @@ function Index(props: MultiTreeIndexProps) {
     );
   };
 
+  useEffect(() => {
+    setTree(props.workspace);
+  }, [props.workspace]);
+
   const onExpand = (itemId: ItemId) => {
     setTree(mutateTree(tree, itemId, { isExpanded: true }));
   };
@@ -88,9 +92,9 @@ function Index(props: MultiTreeIndexProps) {
   };
 
   const addFolder = () => {
-    let folderString = "folder-";
-    let numberOfItems = Object.keys(tree.items).length.toString();
-    let newItemId = folderString.concat(numberOfItems);
+    const folderString = "folder-";
+    const numberOfItems = Object.keys(tree.items).length.toString();
+    const newItemId = folderString.concat(numberOfItems);
     let newTree = JSON.parse(JSON.stringify(tree));
 
     newTree.items[newItemId] = {

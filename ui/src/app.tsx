@@ -1,23 +1,55 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./app.css";
-import workspaces from "./components/file-explorer/example-data.json";
-import Index from "./components/file-explorer";
+import workspaces from "./components/fileExplorer/example-data.json";
+import Index from "./components/fileExplorer";
 import { TreeData } from "@atlaskit/tree";
 
+// const fs = window.require("fs");
+// const { pathModule } = window.require("path");
+//
+// const { app } = window.require("@electron/remote");
+
+export type DialogFileData = {
+  /**
+   * Did user cancel dialog?
+   */
+  cancelled: boolean;
+  /**
+   * Array of file paths that user selected
+   */
+  filePaths: string[];
+};
 function App() {
+  // const [path, setPath] = useState(app.getAppPath());
+  const [newW, setNewW] = useState("");
   const [workspaceName, setWorkspaceName] = useState<string>("workspace-1");
   const [activeWorkspace, setActiveWorkspace] = useState<TreeData>(
     workspaces["workspace-1"]
   );
 
+  const onButtonClick = async () => {
+    // console.log("Start effect");
+    // const s = await window.electron.openFolder("folderPath");
+    // console.log(s);
+    const files: DialogFileData = await window.electron.showDialog();
+    console.log("user files", files);
+  };
+
+  const openNewWorkspace = async () => {
+    const newWorkspace = await window.electron.openNewWorkspace();
+    setActiveWorkspace(newWorkspace);
+    setWorkspaceName(newWorkspace.rootId);
+  };
+
   return (
     <div className="App Container">
+      <button onClick={() => openNewWorkspace()}>New workspace</button>
       {/*<div className="grid-item-1"></div>*/}
       {/*<div className="grid-item-2"></div>*/}
       {/*<div className="grid-item-3"></div>*/}
       {/*<div className="grid-item-4"></div>*/}
       {/*<div className="grid-item-5"></div>*/}
-      <h1>Test tree</h1>
+      <h1>{workspaceName}</h1>
       <Index workspace={activeWorkspace} workspaceName={workspaceName} />
     </div>
   );

@@ -1,5 +1,3 @@
-import React from "react";
-
 export const deleteItemFromArray = (
   arrayToDeleteFrom: Array<any>,
   itemToDelete?: any
