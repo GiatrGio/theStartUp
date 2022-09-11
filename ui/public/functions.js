@@ -1,35 +1,47 @@
 const fs = require("fs");
 
 const createWorkspace = (selectedDirectory) => {
-  const workspaceName = getFileNameFromPath(selectedDirectory);
-  let workspace = initiateNewWorkspace(workspaceName);
+  const workspaceName = getTileNameFromPath(selectedDirectory);
+  let workspace = initiateNewWorkspace(selectedDirectory, workspaceName);
   addFolderItemsInWorkspace(selectedDirectory, workspace);
   return workspace;
 };
 
 const addFolderItemsInWorkspace = (parentDirectory, workspace) => {
-  fs.readdirSync(parentDirectory).map((file) => {
-    if (!/^\..*/.test(file)) {
-      let fullFilePath = "";
-      fullFilePath = fullFilePath.concat(parentDirectory, "/", file);
-      const itemStats = fs.statSync(fullFilePath);
-      let itemName = file;
-      let isFileDirectory = itemStats.isDirectory();
-      if (isFileDirectory) {
-        let parentName = getFileNameFromPath(parentDirectory);
-        addItemInWorkspace(parentName, itemName, itemStats, workspace);
-        addFolderItemsInWorkspace(fullFilePath, workspace);
+  fs.readdirSync(parentDirectory).map((item) => {
+    if (!/^\..*/.test(item)) {
+      let fullTilePath = "";
+      fullTilePath = fullTilePath.concat(parentDirectory, "/", item);
+      const tileStats = fs.statSync(fullTilePath);
+      let tileName = item;
+      let isTileDirectory = tileStats.isDirectory();
+      if (isTileDirectory) {
+        let parentName = getTileNameFromPath(parentDirectory);
+        addTileInWorkspace(
+          parentName,
+          tileName,
+          tileStats,
+          workspace,
+          fullTilePath
+        );
+        addFolderItemsInWorkspace(fullTilePath, workspace);
       } else {
         let parentName = parentDirectory.split("/").pop();
 
         // @ts-ignore
-        addItemInWorkspace(parentName, itemName, itemStats, workspace);
+        addTileInWorkspace(
+          parentName,
+          tileName,
+          tileStats,
+          workspace,
+          fullTilePath
+        );
       }
     }
   });
 };
 
-const initiateNewWorkspace = (workspaceName) => {
+const initiateNewWorkspace = (selectedDirectory, workspaceName) => {
   let newWorkspace = {
     rootId: workspaceName,
     items: {},
@@ -46,15 +58,22 @@ const initiateNewWorkspace = (workspaceName) => {
       QCReportUrl: "",
       size: "",
       selected: false,
+      path: selectedDirectory,
     },
     children: [],
   };
 
   return newWorkspace;
 };
-const addItemInWorkspace = (parentName, itemName, itemStats, newWorkspace) => {
-  const itemType = itemStats.isDirectory() ? "FOLDER" : getFileType(itemName);
-  const itemSize = itemStats.isFile() ? formatSize(itemStats.size ?? 0) : "";
+const addTileInWorkspace = (
+  parentName,
+  itemName,
+  tileStats,
+  newWorkspace,
+  tilePath
+) => {
+  const tileType = tileStats.isDirectory() ? "FOLDER" : getTileType(itemName);
+  const tileSize = tileStats.isFile() ? formatSize(tileStats.size ?? 0) : "";
 
   newWorkspace.items[itemName] = {
     id: itemName,
@@ -63,11 +82,12 @@ const addItemInWorkspace = (parentName, itemName, itemStats, newWorkspace) => {
     isChildrenLoading: false,
     data: {
       id: itemName,
-      type: itemType,
+      type: tileType,
       name: itemName,
       QCReportUrl: "",
-      size: itemSize,
+      size: tileSize,
       selected: false,
+      path: tilePath,
     },
     children: [],
   };
@@ -76,9 +96,9 @@ const addItemInWorkspace = (parentName, itemName, itemStats, newWorkspace) => {
 
   return newWorkspace;
 };
-const getFileType = (itemName) => {
-  const itemEnding = itemName.split(".").pop();
-  switch (itemEnding) {
+const getTileType = (tileName) => {
+  const tileEnding = tileName.split(".").pop();
+  switch (tileEnding) {
     case "fastq":
     case "fq":
       return "FASTQ";
@@ -104,11 +124,11 @@ const formatSize = (size) => {
 };
 
 //TODO Probably needs to be adjusted for different operating systems.
-const getFileNameFromPath = (filePath) => {
-  const fileName = filePath.split("/").pop()?.split(".")[0];
+const getTileNameFromPath = (tilePath) => {
+  const tileName = tilePath.split("/").pop()?.split(".")[0];
 
-  if (fileName !== undefined) {
-    return fileName;
+  if (tileName !== undefined) {
+    return tileName;
   } else {
     return "unknown file";
   }
@@ -116,5 +136,5 @@ const getFileNameFromPath = (filePath) => {
 
 exports.createWorkspace = createWorkspace;
 exports.initiateNewWorkspace = initiateNewWorkspace;
-exports.addItemInWorkspace = addItemInWorkspace;
-exports.getFileType = getFileType;
+exports.addTileInWorkspace = addTileInWorkspace;
+exports.getTileType = getTileType;

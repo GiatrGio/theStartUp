@@ -1,16 +1,8 @@
 const { ipcRenderer, contextBridge } = require("electron");
 
 contextBridge.exposeInMainWorld("electron", {
-  sendNotification(message) {
-    ipcRenderer.send("notify", message);
-  },
-  openFolder(folderPath) {
-    ipcRenderer.invoke("openFolder", folderPath);
-  },
-  createFolder(name) {
-    ipcRenderer.send("createFolder", name);
-  },
-  showDialog: async () => ipcRenderer.invoke("dialog:open"),
+  createFolder: async (name, path) =>
+    ipcRenderer.invoke("createFolder", name, path),
   openNewWorkspace: async () => ipcRenderer.invoke("openNewWorkspace"),
   batteryApi: {},
   filesApi: {},

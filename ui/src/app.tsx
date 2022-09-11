@@ -4,11 +4,6 @@ import workspaces from "./components/fileExplorer/example-data.json";
 import Index from "./components/fileExplorer";
 import { TreeData } from "@atlaskit/tree";
 
-// const fs = window.require("fs");
-// const { pathModule } = window.require("path");
-//
-// const { app } = window.require("@electron/remote");
-
 export type DialogFileData = {
   /**
    * Did user cancel dialog?
@@ -26,14 +21,6 @@ function App() {
   const [activeWorkspace, setActiveWorkspace] = useState<TreeData>(
     workspaces["workspace-1"]
   );
-
-  const onButtonClick = async () => {
-    // console.log("Start effect");
-    // const s = await window.electron.openFolder("folderPath");
-    // console.log(s);
-    const files: DialogFileData = await window.electron.showDialog();
-    console.log("user files", files);
-  };
 
   const openNewWorkspace = async () => {
     const newWorkspace = await window.electron.openNewWorkspace();

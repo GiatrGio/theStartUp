@@ -11,14 +11,18 @@ declare global {
    */
   interface Window {
     electron: {
-      sendNotification: (message: string) => void;
-      openFolder: (folderPath: string) => Promise<string>;
-      createFolder: (createFolder: string) => void;
-      showDialog: () => Promise<DialogFileData>;
+      // sendNotification: (message: string) => void;
+      // openFolder: (folderPath: string) => Promise<string>;
+      // createFolder: (createFolder: string) => void;
+      // showDialog: () => Promise<DialogFileData>;
       openNewWorkspace: () => Promise<DialogFileData>;
-      blenderVersion: (blenderFile: string) => Promise<string>;
-      blenderOpen: (filePath: string, blenderFile: string) => Promise<string>;
-      fileOpen: (filePath: string) => Promise<string>;
+      createFolder: (
+        folderName: string,
+        folderPath: string
+      ) => Promise<boolean>;
+      // blenderVersion: (blenderFile: string) => Promise<string>;
+      // blenderOpen: (filePath: string, blenderFile: string) => Promise<string>;
+      // fileOpen: (filePath: string) => Promise<string>;
     };
   }
 }

@@ -8,3 +8,8 @@ export const deleteItemFromArray = (
   }
   return arrayToDeleteFrom;
 };
+
+export const removeOneLevelFromPath = (path: string): string => {
+  path = path.substring(0, path.lastIndexOf("/"));
+  return path;
+};

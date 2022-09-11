@@ -8,7 +8,7 @@ import Tree, {
   TreeDestinationPosition,
   TreeSourcePosition,
 } from "@atlaskit/tree";
-import Card from "./card/card";
+import Tile from "./tile/tile";
 import {
   deleteItemFromTree,
   renameItemFromTree,
@@ -41,13 +41,14 @@ function Index(props: MultiTreeIndexProps) {
         {...provided.draggableProps}
         {...provided.dragHandleProps}
       >
-        <Card
-          item={item}
+        <Tile
+          tile={item}
           onExpand={onExpand}
           onCollapse={onCollapse}
-          deleteItem={deleteItem}
-          renameItem={renameItem}
-          selectItem={selectItem}
+          deleteTile={deleteItem}
+          renameTile={renameItem}
+          selectTile={selectItem}
+          newFolder={addFolder}
         />
       </div>
     );
@@ -57,12 +58,12 @@ function Index(props: MultiTreeIndexProps) {
     setTree(props.workspace);
   }, [props.workspace]);
 
-  const onExpand = (itemId: ItemId) => {
-    setTree(mutateTree(tree, itemId, { isExpanded: true }));
+  const onExpand = (tileId: ItemId) => {
+    setTree(mutateTree(tree, tileId, { isExpanded: true }));
   };
 
-  const onCollapse = (itemId: ItemId) => {
-    setTree(mutateTree(tree, itemId, { isExpanded: false }));
+  const onCollapse = (tileId: ItemId) => {
+    setTree(mutateTree(tree, tileId, { isExpanded: false }));
   };
 
   const onDragEnd = (
@@ -76,52 +77,56 @@ function Index(props: MultiTreeIndexProps) {
     setTree(newTree);
   };
 
-  const deleteItem = (itemId: ItemId) => {
+  const deleteItem = (tileId: ItemId) => {
     let newTree = JSON.parse(JSON.stringify(tree));
-    setTree(deleteItemFromTree(newTree, itemId));
+    setTree(deleteItemFromTree(newTree, tileId));
   };
 
-  const renameItem = (itemId: ItemId, newName: string) => {
+  const renameItem = (tileId: ItemId, newName: string) => {
     let newTree = JSON.parse(JSON.stringify(tree));
-    setTree(renameItemFromTree(newTree, itemId, newName));
+    setTree(renameItemFromTree(newTree, tileId, newName));
   };
 
-  const selectItem = (itemId: ItemId) => {
+  const selectItem = (tileId: ItemId) => {
     let newTree = JSON.parse(JSON.stringify(tree));
-    setTree(selectItemFromTree(newTree, itemId));
+    setTree(selectItemFromTree(newTree, tileId));
   };
 
-  const addFolder = () => {
-    const folderString = "folder-";
-    const numberOfItems = Object.keys(tree.items).length.toString();
-    const newItemId = folderString.concat(numberOfItems);
-    let newTree = JSON.parse(JSON.stringify(tree));
+  const addFolder = async (folderName: string, folderPath: string) => {
+    const success = await window.electron.createFolder(folderName, folderPath);
+    if (success) {
+      const folderString = "folder-";
+      const numberOfTiles = Object.keys(tree.items).length.toString();
+      const newTileId = folderString.concat(numberOfTiles);
+      let newTree = JSON.parse(JSON.stringify(tree));
 
-    newTree.items[newItemId] = {
-      id: newItemId,
-      hasChildren: false,
-      isExpanded: false,
-      isChildrenLoading: false,
-      data: {
-        id: numberOfItems,
-        type: "folder",
-        name: "User defined name",
-        QCReportUrl: "fileLocation",
-        size: "fileSize",
-        isSelected: false,
-      },
-      children: [],
-    };
-    console.log(newTree);
-    newTree.items[props.workspaceName].children.push(newItemId);
-    setTree(newTree);
+      newTree.items[newTileId] = {
+        id: newTileId,
+        hasChildren: false,
+        isExpanded: false,
+        isChildrenLoading: false,
+        data: {
+          id: numberOfTiles,
+          type: "folder",
+          name: folderName,
+          QCReportUrl: "fileLocation",
+          size: "fileSize",
+          isSelected: false,
+        },
+        children: [],
+      };
+      console.log(newTree);
+      newTree.items[props.workspaceName].children.push(newTileId);
+      setTree(newTree);
+    } else {
+      //TODO Throw a warning modal message
+    }
   };
 
   useEffect(() => {}, [tree]);
 
   return (
     <div>
-      <button onClick={addFolder}>Add Folder</button>
       <Tree
         tree={tree}
         renderItem={renderItem}
