@@ -39,7 +39,7 @@ for sample in Pe16; do
     if [ ! -f ${report} ]; then
         NanoPlot --fastq ${output} -t ${threads} --outdir ${output_dir} -p ${sample}_ --plots dot -f eps
     fi
-
+    # test
     conda deactivate
 
     done
