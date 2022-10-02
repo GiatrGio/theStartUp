@@ -1,22 +1,30 @@
 import React, { useEffect, useState } from "react";
 import "./app.css";
 import workspaces from "./components/fileExplorer/example-data.json";
-import Index from "./components/fileExplorer";
 import { TreeData } from "@atlaskit/tree";
+import { Login } from "./components/loginPage/login";
+import { useDispatch, useSelector } from "react-redux";
+import { bindActionCreators } from "redux";
+import { actionCreators, State } from "./state";
+import { Box, Popper } from "@mui/material";
+import Index from "./components/fileExplorer";
+import { MainPanel } from "./components/mainPanel/mainPanel";
+import TileOverview from "./components/tileOverview/tileOverview";
 
-export type DialogFileData = {
-  /**
-   * Did user cancel dialog?
-   */
-  cancelled: boolean;
-  /**
-   * Array of file paths that user selected
-   */
-  filePaths: string[];
-};
 function App() {
-  // const [path, setPath] = useState(app.getAppPath());
-  const [newW, setNewW] = useState("");
+  const dispatch = useDispatch();
+
+  const { depositMoney, withdrawMoney, bankrupt } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
+  const { loginUser, logoutUser, signupUser } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
+  const amount = useSelector((state: State) => state.bank);
+  const currentUser = useSelector((state: State) => state.user);
+
   const [workspaceName, setWorkspaceName] = useState<string>("workspace-1");
   const [activeWorkspace, setActiveWorkspace] = useState<TreeData>(
     workspaces["workspace-1"]
@@ -30,14 +38,20 @@ function App() {
 
   return (
     <div className="App Container">
-      <button onClick={() => openNewWorkspace()}>New workspace</button>
-      {/*<div className="grid-item-1"></div>*/}
-      {/*<div className="grid-item-2"></div>*/}
-      {/*<div className="grid-item-3"></div>*/}
-      {/*<div className="grid-item-4"></div>*/}
-      {/*<div className="grid-item-5"></div>*/}
-      <h1>{workspaceName}</h1>
-      <Index workspace={activeWorkspace} workspaceName={workspaceName} />
+      <div className="grid-item header"></div>
+      <div className="grid-item file-manager">
+        <button onClick={() => openNewWorkspace()}>New workspace</button>
+        <Index workspace={activeWorkspace} workspaceName={workspaceName} />
+      </div>
+      <div className="grid-item main-panel">
+        <MainPanel />
+        <Login />
+      </div>
+      <div className="grid-item footer"></div>
+
+      <button onClick={() => depositMoney(1000)}>Deposit</button>
+      <button onClick={() => withdrawMoney(1000)}>Withdraw</button>
+      <button onClick={() => bankrupt()}>Bankrupt</button>
     </div>
   );
 }

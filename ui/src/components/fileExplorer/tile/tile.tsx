@@ -3,11 +3,12 @@ import "./tile.css";
 import { FQ, GFF, BAM, FA, FOLDER, VCF, UNKNOWN } from "../../../icons/icon";
 import { AiFillFolderOpen } from "react-icons/ai";
 import React, { useEffect, useState } from "react";
-import { Checkbox } from "@mui/material";
+import { Checkbox, Popper } from "@mui/material";
 import { BiDownArrow, BiRightArrow } from "react-icons/bi";
 import { FormModal } from "../../commonComponents/formModal/formModal";
 import { itemTypes } from "../../../interfaces/commonTypes";
-import { removeOneLevelFromPath } from "../../../commonFunctions/commonFunctions";
+import { removeOneLevelFromPath } from "../../../utils/commonFunctions";
+import TileOverview from "../../tileOverview/tileOverview";
 
 interface TileProps {
   tile: TreeItem;
@@ -29,16 +30,24 @@ function Tile({
   newFolder,
 }: TileProps) {
   const [selected, setSelected] = useState(false);
-  const [isContextMenuShown, setIsContextMenuShown] = useState(false);
-  const [contextMenuPosition, setContextMenuPosition] = useState({
-    x: 0,
-    y: 0,
-  });
   const [isRenameMenuShown, setIsRenameMenuShown] = useState(false);
   const [tileName, setTileName] = useState(tile.data.name);
   const [tempName, setTempName] = React.useState(tile.data.name);
-  const [isFolderNameOpen, setIsFolderNameOpen] = useState(false);
-  const [folderName, setFolderName] = useState("");
+  const [isNewFolderNamePopupOpen, setIsNewFolderNamePopupOpen] =
+    useState(false);
+
+  const [anchorOverviewElement, setAnchorOverviewElement] =
+    React.useState<null | HTMLElement>(null);
+
+  const tileOverviewOpen = Boolean(anchorOverviewElement);
+
+  const handleOverviewOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorOverviewElement(event.currentTarget);
+  };
+
+  const handleOverviewClose = () => {
+    setAnchorOverviewElement(null);
+  };
 
   useEffect(() => {
     setTileName(tile.data.name);
@@ -49,17 +58,15 @@ function Tile({
     console.log(tile);
   }, [tile.data.selected]);
 
-  const openFolderNameModal = () => {
-    setIsFolderNameOpen(true);
-    console.log("hi");
+  const newFolderClick = () => {
+    setIsNewFolderNamePopupOpen(true);
   };
 
   const closeFolderNameModal = () => {
-    setIsFolderNameOpen(false);
+    setIsNewFolderNamePopupOpen(false);
   };
 
   const onNewFolder = (newFolderName: string) => {
-    console.log("tile ", tile);
     let folderPath = tile.data.path;
     if (tile.data.type !== itemTypes.FOLDER) {
       folderPath = removeOneLevelFromPath(folderPath);
@@ -75,10 +82,6 @@ function Tile({
     selectTile(tile.id);
   };
 
-  const onLeftClickFunctionality = () => {
-    setIsContextMenuShown(false);
-  };
-
   const onRenameInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTempName(event.target.value);
   };
@@ -87,26 +90,10 @@ function Tile({
     setIsRenameMenuShown(false);
   };
 
-  const onSubmit = () => {
-    console.log("Submit");
-  };
-
   const onRenameTileSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsRenameMenuShown(false);
     renameTile(tile.id, tempName);
-  };
-
-  const openContextMenu = (e: React.MouseEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    setIsContextMenuShown(false);
-
-    const newPosition = {
-      x: e.pageX,
-      y: e.pageY,
-    };
-    setContextMenuPosition(newPosition);
-    setIsContextMenuShown(true);
   };
 
   const expandTileIcon = () => {
@@ -143,21 +130,26 @@ function Tile({
   };
 
   return (
-    <div
-      className="tileMain"
-      onContextMenu={openContextMenu}
-      onClick={onLeftClickFunctionality}
-    >
+    <div className="tileMain">
       <Checkbox
         value="defaultIsOpen"
         name="toggleValue"
         onChange={(e) => onSelected()}
       />
       <button onClick={() => deleteTile(tile.id)}>Delete Folder</button>
-      <h3>
-        {" "}
-        Lets go for a <AiFillFolderOpen />?{" "}
-      </h3>
+      <div onMouseEnter={handleOverviewOpen} onMouseLeave={handleOverviewClose}>
+        <h3>
+          {" "}
+          Lets go for a <AiFillFolderOpen />?{" "}
+        </h3>
+        <Popper
+          placement={"right-end"}
+          open={tileOverviewOpen}
+          anchorEl={anchorOverviewElement}
+        >
+          <TileOverview helloString={"dsads"} />
+        </Popper>
+      </div>
       {isRenameMenuShown ? (
         <div>
           <form onSubmit={onRenameTileSubmit}>
@@ -171,32 +163,15 @@ function Tile({
           </form>
         </div>
       ) : (
-        tileName
+        <span onDoubleClick={() => renameTileClick()}>{tileName}</span>
       )}
       {expandTileIcon()}
       <div className="cardSize">{tile.data.size}</div>
       <img src={getTileIconType()} alt="Logo" />
-      {isContextMenuShown && (
-        <div
-          style={{ top: contextMenuPosition.y, left: contextMenuPosition.x }}
-          className="contextMenu"
-        >
-          <div className="contextMenuOption" onClick={() => renameTileClick()}>
-            Rename
-          </div>
-          <div
-            className="contextMenuOption"
-            onClick={() => openFolderNameModal()}
-          >
-            New folder
-          </div>
-          <div className="contextMenuOption">Option #3</div>
-        </div>
-      )}
-      ;
+      <button onClick={() => newFolderClick()}>New folder</button>
       <FormModal
         title={"New folder"}
-        isOpen={isFolderNameOpen}
+        isOpen={isNewFolderNamePopupOpen}
         onClose={closeFolderNameModal}
         onSubmit={onNewFolder}
       ></FormModal>
