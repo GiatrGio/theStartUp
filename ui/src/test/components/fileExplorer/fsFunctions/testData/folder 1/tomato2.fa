@@ -1,0 +1,4 @@
+Sample	fastp_mqc-generalstats-fastp-pct_duplication	fastp_mqc-generalstats-fastp-after_filtering_q30_rate	fastp_mqc-generalstats-fastp-after_filtering_q30_bases	fastp_mqc-generalstats-fastp-after_filtering_gc_content	fastp_mqc-generalstats-fastp-pct_surviving	Trimmomatic_mqc-generalstats-trimmomatic-dropped_pct	FastQC_mqc-generalstats-fastqc-percent_duplicates	FastQC_mqc-generalstats-fastqc-percent_gc	FastQC_mqc-generalstats-fastqc-avg_sequence_length	FastQC_mqc-generalstats-fastqc-percent_fails	FastQC_mqc-generalstats-fastqc-total_sequences
+Pfs16_H3L3NBGXY_S14_L002	0.899402	0.840358	1583373874.0	0.494201	99.08940390005758						
+Pfs16_H3L3NBGXY_S14_L002_R1_001						0.66	16.998852319406538	49.0	149.94172131599015	0.0	7570847.0
+Pfs16_H3L3NBGXY_S14_L002_R2_001							13.821152528449446	49.0	150.55132695192492	0.0	7570847.0

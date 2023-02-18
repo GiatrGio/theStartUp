@@ -1,0 +1,41 @@
+.App {
+  text-align: center;
+}
+
+.Container {
+  display: grid;
+  grid-template-columns: 25% 75%;
+  grid-template-rows: 5vh 90vh 5vh;
+}
+
+.grid-item.header {
+  border: solid 1px black;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 1;
+}
+
+.grid-item.file-manager {
+  border: solid 1px black;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+.grid-item.main-panel {
+  border: solid 1px black;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+.grid-item.footer {
+  border: solid 1px black;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 3;
+  grid-row-end: 4;
+}

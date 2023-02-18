@@ -1,0 +1,69 @@
+.top {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    position: sticky;
+    align-items: center;
+    justify-content: center;
+}
+.topLeft {
+    flex: 1;
+}
+.topCenter {
+    flex: 6;
+}
+.topRight {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+    margin-right: 0.2rem;
+}
+.topCenter ul {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.topCenter ul li {
+    padding: 0.5rem;
+    margin-right: 20px;
+    font-size: 18px;
+    font-weight: 300;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    position: relative;
+}
+
+.topCenter ul li::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color:#3d3d3d;
+    transform: scaleX(0);
+    transition: all 0.5s;
+    transform-origin: left;
+}
+.topCenter ul li::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color:#3d3d3d;
+    transform: scaleX(0);
+    transition: all 0.5s;
+    transform-origin: right;
+}
+.topCenter ul li:hover:before, ul li:hover:after {
+    transform: scaleX(1);
+}
+
+
+
