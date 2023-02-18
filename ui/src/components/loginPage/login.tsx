@@ -58,13 +58,14 @@ export const Login = () => {
         loginUser(userCredential.user);
         setInfoMsg("Log in successfully");
         setErrorMsg("");
+        console.log("currentUser ", currentUser);
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         setErrorMsg(error.message);
-        
+
         setInfoMsg("");
       });
   };
@@ -91,3 +92,4 @@ export const Login = () => {
 };
 
 // admin@gmail.com admin123
+  // admin@admin.com 123456

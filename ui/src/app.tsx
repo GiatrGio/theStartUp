@@ -10,6 +10,7 @@ import { Box, Popper } from "@mui/material";
 import Index from "./components/fileExplorer";
 import { MainPanel } from "./components/mainPanel/mainPanel";
 import TileOverview from "./components/tileOverview/tileOverview";
+import { Header } from "./components/header/header";
 
 function App() {
   const dispatch = useDispatch();
@@ -38,7 +39,9 @@ function App() {
 
   return (
     <div className="App Container">
-      <div className="grid-item header"></div>
+      <div className="grid-item header">
+        <Header />
+      </div>
       <div className="grid-item file-manager">
         <button onClick={() => openNewWorkspace()}>New workspace</button>
         <Index workspace={activeWorkspace} workspaceName={workspaceName} />

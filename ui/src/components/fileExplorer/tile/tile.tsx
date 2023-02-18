@@ -5,7 +5,7 @@ import { AiFillFolderOpen } from "react-icons/ai";
 import React, { useEffect, useState } from "react";
 import { Checkbox, Popper } from "@mui/material";
 import { BiDownArrow, BiRightArrow } from "react-icons/bi";
-import { FormModal } from "../../commonComponents/formModal/formModal";
+import { Modal } from "../../commonComponents/formModal/modal";
 import { itemTypes } from "../../../interfaces/commonTypes";
 import { removeOneLevelFromPath } from "../../../utils/commonFunctions";
 import TileOverview from "../../tileOverview/tileOverview";
@@ -55,7 +55,6 @@ function Tile({
 
   useEffect(() => {
     setSelected(tile.data.selected);
-    console.log(tile);
   }, [tile.data.selected]);
 
   const newFolderClick = () => {
@@ -66,7 +65,12 @@ function Tile({
     setIsNewFolderNamePopupOpen(false);
   };
 
-  const onNewFolder = (newFolderName: string) => {
+  const onNewFolderSubmit = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    const target = e.target as typeof e.target & {
+      name: { value: string };
+    };
+    const newFolderName = target.name.value;
     let folderPath = tile.data.path;
     if (tile.data.type !== itemTypes.FOLDER) {
       folderPath = removeOneLevelFromPath(folderPath);
@@ -169,12 +173,27 @@ function Tile({
       <div className="cardSize">{tile.data.size}</div>
       <img src={getTileIconType()} alt="Logo" />
       <button onClick={() => newFolderClick()}>New folder</button>
-      <FormModal
-        title={"New folder"}
+      <Modal
         isOpen={isNewFolderNamePopupOpen}
         onClose={closeFolderNameModal}
-        onSubmit={onNewFolder}
-      ></FormModal>
+        children={
+          <div className={"modalBox"}>
+            <button
+              className={"modalClose"}
+              onClick={closeFolderNameModal}
+            ></button>
+            <div className={"modalTitle"}>{"New folder"}</div>
+            <div className={"modalContent"}>{"Content"}</div>
+            <div className={"modalForm"}>
+              <form onSubmit={onNewFolderSubmit}>
+                <input type="text" id="nameInput" name="name" />
+                <br />
+                <input type="submit" value="Submit" />
+              </form>
+            </div>
+          </div>
+        }
+      ></Modal>
     </div>
   );
 }
