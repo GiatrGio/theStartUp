@@ -6,13 +6,13 @@
 #  Copyright 2020 Petros Skiadas <petros@pskiadas.gr>
 
 
-import glob, os, argparse, logging, time, datetime
+import glob, os, argparse, time
 from sys import path
 
 # import python scripts from the directory of the current script
 sdir = f'{os.path.dirname(os.path.realpath(__file__))}/'
 path.append('sdir')
-import illumina_instrument, qc_short_reads
+import illumina_instrument
 
 
 def parse_samples():
