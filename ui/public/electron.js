@@ -3,6 +3,7 @@ const path = require("path");
 const fs = require("fs");
 const { dialog } = require("electron");
 const { createWorkspace } = require("./functions.js");
+const isDev = require("electron-is-dev");
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -14,11 +15,12 @@ function createWindow() {
       contextIsolation: true,
     },
   });
+  win.webContents.openDevTools()
 
-  win.loadURL("http://localhost:3000");
+  win.loadURL(isDev? "http://localhost:3000": `file://${__dirname}/../build/index.html`);
 }
 
-require("electron-reload")(__dirname);
+// require("electron-reload")(__dirname);
 
 app.on("ready", createWindow);
 

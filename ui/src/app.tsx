@@ -6,10 +6,8 @@ import { Login } from "./components/loginPage/login";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators, State } from "./state";
-import { Box, Popper } from "@mui/material";
 import Index from "./components/fileExplorer";
 import { MainPanel } from "./components/mainPanel/mainPanel";
-import TileOverview from "./components/tileOverview/tileOverview";
 import { Header } from "./components/header/header";
 
 function App() {
